@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text("descripcion")->nullable(); //Nullable es para que acepte valores nulos
             $table->boolean("menu")->default(0); //0 porque es null, este va ser para ver si esta en el menu o no
             $table->integer("orden")->default(1); //Un valor int para guardar la posicion de la ctegoria de la empresa
+            $table->timestamps(); // Esto crea automáticamente created_at y updated_at
         });
     }
 

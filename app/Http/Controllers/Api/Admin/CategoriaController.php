@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Models\Categoria;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoriaController extends Controller
 {
     public function index(){//función para mostrar la lista de categorias
-        $data = Categoria::orderBy("orden")->get(["id","name"]);//Obtine el id y nombre de cada categoria, las ordena por orden
+        $data = Categoria::orderBy("orden")->get(["id","nombre"]);//Obtine el id y nombre de cada categoria, las ordena por orden
         return response()->json($data, 200);
     }
 
@@ -60,5 +62,11 @@ class CategoriaController extends Controller
         $data->slug = Str::slug($request->nombre);
         $data->save();//Hace la actualización permanente
         return response()->json($data, 200);
+    }
+
+    public function destroy($id){
+        $data = Categoria::find($id);
+        $data->delete();
+        return response()->json("Categoria borrada", 200);
     }
 }
